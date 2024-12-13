@@ -10,22 +10,9 @@
 		94188C5E2D0CCF2500CCAC00 /* BaseMVVMCKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BaseMVVMCKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		94188C632D0CCF2500CCAC00 /* Exceptions for "BaseMVVMCKit" folder in "BaseMVVMCKit" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			publicHeaders = (
-				BaseMVVMCKit.h,
-			);
-			target = 94188C5D2D0CCF2500CCAC00 /* BaseMVVMCKit */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		94188C602D0CCF2500CCAC00 /* BaseMVVMCKit */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				94188C632D0CCF2500CCAC00 /* Exceptions for "BaseMVVMCKit" folder in "BaseMVVMCKit" target */,
-			);
 			path = BaseMVVMCKit;
 			sourceTree = "<group>";
 		};
