@@ -1,0 +1,7 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/mertalp/Library/Developer/Xcode/DerivedData/BaseMVVMCKit-gcmzoiktkyumalblrqujnkjtrpri/Build/Intermediates.noindex/ArchiveIntermediates/BaseMVVMCKit/InstallationBuildProductsLocation/Library/Frameworks/BaseMVVMCKit.framework/BaseMVVMCKit'
+relocations:
+  - { offset: 0x33, size: 0x8, addend: 0x0, symName: _BaseMVVMCKitVersionString, symObjAddr: 0x0, symBinAddr: 0x4000, symSize: 0x0 }
+  - { offset: 0x67, size: 0x8, addend: 0x0, symName: _BaseMVVMCKitVersionNumber, symObjAddr: 0x38, symBinAddr: 0x4038, symSize: 0x0 }
+...
