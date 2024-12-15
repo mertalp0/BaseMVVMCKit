@@ -8,21 +8,26 @@ let package = Package(
     ],
     products: [
         .library(
-            name:  "BaseMVVMCKit",
+            name: "BaseMVVMCKit",
             targets: ["BaseMVVMCKit"]
-        ),
+        )
     ],
     targets: [
         .target(
             name: "BaseMVVMCKit",
             dependencies: [],
-            path: "Source/BaseKit"
+            path: "Source/BaseKit",
+            sources: [
+                "Coordinator",
+                "Controller",
+                "ViewModel",
+                "View"
+            ]
         ),
         .testTarget(
             name: "BaseMVVMCKitTests",
             dependencies: ["BaseMVVMCKit"],
             path: "Tests/BaseMVVMCKitTests"
-        ),
+        )
     ]
 )
- 
