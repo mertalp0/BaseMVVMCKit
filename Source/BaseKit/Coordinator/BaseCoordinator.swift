@@ -9,7 +9,7 @@ import UIKit
 
 public protocol Coordinator: AnyObject {
     var childCoordinators: [Coordinator] { get set }
-    var parentNavigationController: UINavigationController { get set }
+    var navigationController: UINavigationController? { get set }
     func start()
 }
 
@@ -17,28 +17,32 @@ open class BaseCoordinator: Coordinator {
     
     // MARK: - Properties
     public var childCoordinators: [Coordinator] = []
-    public var parentNavigationController: UINavigationController
-
+    public weak var navigationController: UINavigationController?
+    
     // MARK: - Initialization
     public init(navigationController: UINavigationController) {
-        self.parentNavigationController = navigationController
+        self.navigationController = navigationController
     }
     
-
-    open func start() {
-    // Start method must be implemented by subclass
+    // MARK: - Debugging
+    deinit {
+        print("\(type(of: self)) deinitialized.")
     }
-
+    
+    open func start() {
+        // Start method must be implemented by subclass
+    }
+    
     public func addChildCoordinator(_ coordinator: Coordinator) {
         childCoordinators.append(coordinator)
     }
-
+    
     public func removeChildCoordinator(_ coordinator: Coordinator) {
         childCoordinators = childCoordinators.filter { $0 !== coordinator }
     }
     
     public func push(_ viewController: UIViewController, animated: Bool = true) {
-           parentNavigationController.pushViewController(viewController, animated: animated)
-       }
-    
+        navigationController?.pushViewController(viewController, animated: animated)
+    }
 }
+

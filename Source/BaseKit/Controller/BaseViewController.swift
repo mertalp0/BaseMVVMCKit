@@ -12,8 +12,8 @@ import Combine
 open class BaseViewController<CoordinatorType: BaseCoordinator, ViewModelType: BaseViewModel>: UIViewController {
     
     // MARK: - Properties
-    public var coordinator: CoordinatorType?
-    public var viewModel: ViewModelType
+    public private(set) var coordinator: CoordinatorType?
+    public private(set) var viewModel: ViewModelType
     private var cancellables = Set<AnyCancellable>()
     private var loadingView: UIView?
 
@@ -26,43 +26,46 @@ open class BaseViewController<CoordinatorType: BaseCoordinator, ViewModelType: B
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    //MARK: - deinit
+    deinit {
+        print("\(type(of: self)) deinitialized")
+        cancellables.removeAll()
+    }
 
     // MARK: - Lifecycle
     open override func viewDidLoad() {
         super.viewDidLoad()
-        setupController()
         bindViewModel()
-    }
-
-    // MARK: - Setup
-    open func setupController() {
-        view.backgroundColor = .white
     }
 }
 
-// MARK: - Loading Management
 @available(iOS 13.0, *)
 extension BaseViewController {
     
     func showLoading() {
         DispatchQueue.main.async {
             if self.loadingView == nil {
-                self.loadingView = UIView(frame: self.view.bounds)
-                self.loadingView?.backgroundColor = UIColor(white: 0, alpha: 0.5)
-                let activityIndicator = UIActivityIndicatorView(style: .large)
-                activityIndicator.center = CGPoint(x: self.view.bounds.midX, y: self.view.bounds.midY)
-                activityIndicator.color = .white
-                activityIndicator.startAnimating()
-                self.loadingView?.addSubview(activityIndicator)
+                self.loadingView = LoadingView(frame: self.view.bounds)
+                self.loadingView?.alpha = 0
                 self.view.addSubview(self.loadingView!)
+                
+                UIView.animate(withDuration: 0.3) {
+                    self.loadingView?.alpha = 1
+                }
             }
         }
     }
     
     func hideLoading() {
         DispatchQueue.main.async {
-            self.loadingView?.removeFromSuperview()
-            self.loadingView = nil
+          
+            UIView.animate(withDuration: 0.3, animations: {
+                self.loadingView?.alpha = 0
+            }) { _ in
+                self.loadingView?.removeFromSuperview()
+                self.loadingView = nil
+            }
         }
     }
 }
@@ -108,17 +111,15 @@ extension BaseViewController {
 // MARK: - Bind ViewModel
 @available(iOS 13.0, *)
 extension BaseViewController {
-    func bindViewModel() {
-        // Bind error messages to alerts
-        viewModel.$errorMessage
-            .sink { [weak self] errorMessage in
-                if let message = errorMessage {
-                    self?.showAlert(title: "Error", message: message)
-                }
-            }
-            .store(in: &cancellables)
+    private func bindViewModel() {
+        bindLoading()
+        bindError()
+    }
+}
 
-        // Bind loading state to loading view
+@available(iOS 13.0, *)
+extension BaseViewController {
+    private func bindLoading() {
         viewModel.$isLoading
             .sink { [weak self] isLoading in
                 if isLoading {
@@ -130,3 +131,18 @@ extension BaseViewController {
             .store(in: &cancellables)
     }
 }
+
+@available(iOS 13.0, *)
+extension BaseViewController {
+    private func bindError() {
+        viewModel.$errorMessage
+            .sink { [weak self] errorMessage in
+                if let message = errorMessage {
+                    self?.showAlert(title: "Error", message: message)
+                }
+            }
+            .store(in: &cancellables)
+    }
+}
+
+

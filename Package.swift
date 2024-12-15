@@ -8,7 +8,7 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "BaseMVVMCKit",
+            name:  "BaseMVVMCKit",
             targets: ["BaseMVVMCKit"]
         ),
     ],
@@ -25,3 +25,4 @@ let package = Package(
         ),
     ]
 )
+ 
