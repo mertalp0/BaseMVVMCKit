@@ -12,8 +12,8 @@ import Combine
 open class BaseViewController<CoordinatorType: BaseCoordinator, ViewModelType: BaseViewModel>: UIViewController {
     
     // MARK: - Properties
-    public private(set) var coordinator: CoordinatorType?
-    public private(set) var viewModel: ViewModelType
+    public var coordinator: CoordinatorType?
+    public var viewModel: ViewModelType
     private var cancellables = Set<AnyCancellable>()
     private var loadingView: UIView?
 
