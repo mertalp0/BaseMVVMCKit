@@ -42,7 +42,22 @@ open class BaseCoordinator: Coordinator {
     }
     
     public func push(_ viewController: UIViewController, animated: Bool = true) {
+        viewController.navigationItem.hidesBackButton = true
         navigationController?.pushViewController(viewController, animated: animated)
     }
+    
+    public func pop(animated: Bool = true) {
+        navigationController?.popViewController(animated: animated)
+    }
+    
+    public func popToRoot(animated: Bool = true) {
+        navigationController?.popToRootViewController(animated: animated)
+    }
+    
+    // MARK: - Swipe Gesture Control
+    public func setSwipeGestureEnabled(_ isEnabled: Bool) {
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = isEnabled
+    }
+    
 }
-
+ 
