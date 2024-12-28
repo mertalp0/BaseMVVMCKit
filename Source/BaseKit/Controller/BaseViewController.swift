@@ -38,10 +38,6 @@ open class BaseViewController<CoordinatorType: BaseCoordinator, ViewModelType: B
         super.viewDidLoad()
         bindViewModel()
     }
-}
-
-@available(iOS 13.0, *)
-extension BaseViewController {
     
     open func showLoading() {
         DispatchQueue.main.async {
@@ -70,11 +66,12 @@ extension BaseViewController {
     }
 }
 
+
 // MARK: - Alerts
 @available(iOS 13.0, *)
 extension BaseViewController {
     
-    open func showAlert(title: String, message: String, actionTitle: String = "OK", handler: (() -> Void)? = nil) {
+     func showAlert(title: String, message: String, actionTitle: String = "OK", handler: (() -> Void)? = nil) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             let action = UIAlertAction(title: actionTitle, style: .default) { _ in
@@ -85,7 +82,7 @@ extension BaseViewController {
         }
     }
     
-    open func showConfirmationAlert(
+     func showConfirmationAlert(
         title: String,
         message: String,
         confirmTitle: String = "Confirm",
