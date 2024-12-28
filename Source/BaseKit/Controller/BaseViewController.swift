@@ -43,7 +43,7 @@ open class BaseViewController<CoordinatorType: BaseCoordinator, ViewModelType: B
 @available(iOS 13.0, *)
 extension BaseViewController {
     
-    func showLoading() {
+    open func showLoading() {
         DispatchQueue.main.async {
             if self.loadingView == nil {
                 self.loadingView = LoadingView(frame: self.view.bounds)
@@ -57,7 +57,7 @@ extension BaseViewController {
         }
     }
     
-    func hideLoading() {
+    open func hideLoading() {
         DispatchQueue.main.async {
           
             UIView.animate(withDuration: 0.3, animations: {
@@ -74,7 +74,7 @@ extension BaseViewController {
 @available(iOS 13.0, *)
 extension BaseViewController {
     
-    func showAlert(title: String, message: String, actionTitle: String = "OK", handler: (() -> Void)? = nil) {
+    open func showAlert(title: String, message: String, actionTitle: String = "OK", handler: (() -> Void)? = nil) {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             let action = UIAlertAction(title: actionTitle, style: .default) { _ in
@@ -85,7 +85,7 @@ extension BaseViewController {
         }
     }
     
-    func showConfirmationAlert(
+    open func showConfirmationAlert(
         title: String,
         message: String,
         confirmTitle: String = "Confirm",

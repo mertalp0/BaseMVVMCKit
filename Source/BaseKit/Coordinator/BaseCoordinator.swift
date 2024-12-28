@@ -54,10 +54,5 @@ open class BaseCoordinator: Coordinator {
         navigationController?.popToRootViewController(animated: animated)
     }
     
-    // MARK: - Swipe Gesture Control
-    public func setSwipeGestureEnabled(_ isEnabled: Bool) {
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = isEnabled
-    }
-    
 }
  
