@@ -15,7 +15,7 @@ open class BaseViewController<CoordinatorType: BaseCoordinator, ViewModelType: B
     public var coordinator: CoordinatorType?
     public var viewModel: ViewModelType
     private var cancellables = Set<AnyCancellable>()
-     var loadingView: UIView?
+    public var loadingView: UIView?
 
     // MARK: - Initialization
     public init(viewModel: ViewModelType) {
