@@ -40,9 +40,12 @@ open class BaseViewController<CoordinatorType: BaseCoordinator, ViewModelType: B
     }
     
     open func showLoading() {
+        
+        guard let window = UIApplication.shared.windows.first else { return }
+
         DispatchQueue.main.async {
             if self.loadingView == nil {
-                self.loadingView = LoadingView(frame: self.view.bounds)
+                self.loadingView = LoadingView(frame: window.bounds)
                 self.loadingView?.alpha = 0
                 self.view.addSubview(self.loadingView!)
                 
