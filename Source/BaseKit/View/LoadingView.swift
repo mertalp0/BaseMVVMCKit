@@ -9,7 +9,6 @@ import UIKit
 
 final class LoadingView: UIView {
     
-    
     private let activityIndicator = UIActivityIndicatorView(style: .large)
     
     // MARK: - Initialization

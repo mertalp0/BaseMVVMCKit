@@ -47,8 +47,8 @@ open class BaseViewController<CoordinatorType: BaseCoordinator, ViewModelType: B
             if self.loadingView == nil {
                 self.loadingView = LoadingView(frame: window.bounds)
                 self.loadingView?.alpha = 0
-                self.view.addSubview(self.loadingView!)
-                
+                window.addSubview(self.loadingView!) 
+
                 UIView.animate(withDuration: 0.3) {
                     self.loadingView?.alpha = 1
                 }
